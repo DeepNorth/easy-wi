@@ -48,17 +48,7 @@ crashlytics-build.properties
 ### Composer template
 composer.phar
 /web/vendor/*/*/[^.]*
-/web/vendor/*/*/[^.]*
-/web/vendor/composer/installed.json
-/web/vendor/composer/autoload_classmap.php
-/web/vendor/composer/autoload_namespaces.php
-/web/vendor/composer/autoload_psr4.php
-/web/vendor/composer/autoload_files.php
-/web/vendor/composer/autoload_real.php
-/web/vendor/composer/ClassLoader.php
-/web/vendor/composer/LICENSE
-/web/vendor/composer/[^.]*
-/web/vendor/*/*/.git
+
 # Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
