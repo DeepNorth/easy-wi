@@ -38,7 +38,6 @@
  */
 
 include(EASYWIDIR . '/stuff/keyphrasefile.php');
-include(EASYWIDIR . '/third_party/password_compat/password.php');
 
 $sprache = getlanguagefile('user', $user_language, $reseller_id);
 

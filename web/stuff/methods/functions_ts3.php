@@ -37,17 +37,6 @@
  * Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-if (!class_exists('Net_SSH2')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SSH2.php');
-}
-
-if (!class_exists('Crypt_RSA')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Crypt/RSA.php');
-}
-
-if (!class_exists('Net_SFTP')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SFTP.php');
-}
 
 if (!function_exists('ssh2_execute')) {
     include(EASYWIDIR . '/stuff/methods/functions_ssh_exec.php');
@@ -120,13 +109,13 @@ function tsdns ($action, $sship, $sshport, $sshuser, $keyuse, $sshkey, $sshpw, $
 
     global $sql;
 
-    $sshSftpObject = new Net_SFTP($sship, $sshport);
+    $sshSftpObject = new \phpseclib\Net\SFTP($sship, $sshport);
 
     if ($keyuse != 'N') {
 
         $privateKey = EASYWIDIR . '/keys/' . removePub($sshkey);
 
-        $sshpw = new Crypt_RSA();
+        $sshpw = new \phpseclib\Crypt\RSA();
 
         if ($keyuse == 'B') {
             $sshpw->setPassword($sshpw);
@@ -293,9 +282,9 @@ function tsdns ($action, $sship, $sshport, $sshuser, $keyuse, $sshkey, $sshpw, $
         if (!isset($bad) and $action != 'li') {
 
 
-            $sshObject = new Net_SSH2($sship, $sshport);
+            $sshObject = new \phpseclib\Net\SSH2($sship, $sshport);
 
-            if ($sshObject->error === false) {
+            if ($sshObject) {
                 if ($sshObject->login($sshuser, $sshpw)) {
 
                     $bin = ($bitversion == 32) ? 'tsdnsserver_linux_x86' : 'tsdnsserver_linux_amd64';

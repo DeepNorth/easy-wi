@@ -89,8 +89,8 @@ if ($ui->w('action', 4, 'post') and !token(true)) {
 
         $userPanelInclude = true;
 
-        include(EASYWIDIR . '/third_party/monstaftp/class_monstaftp.php');
-        include(EASYWIDIR . '/third_party/monstaftp/monstaftp.php');
+        include(EASYWIDIR . '/vendor/monstaftp/class_monstaftp.php');
+        include(EASYWIDIR . '/vendor/monstaftp/monstaftp.php');
 
     } else {
         $template_file = 'userpanel_404.tpl';

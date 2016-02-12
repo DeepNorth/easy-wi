@@ -37,23 +37,26 @@
  * Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-if (!class_exists('Net_SSH2')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SSH2.php');
-}
-
-if (!class_exists('Crypt_RSA')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Crypt/RSA.php');
-}
-
-if (!class_exists('Net_SFTP')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SFTP.php');
-}
 
 class HttpdManagement {
 
     // Data
     private $sql, $aeskey, $resellerID, $hostID, $ssh2Pass, $hostData = array(), $vhostData = false, $dataPrepared = false;
-    public $ssh2Object = false, $sftpObject = false, $masterNotfound = false;
+
+    /**
+     * @var \phpseclib\Net\SSH2
+     */
+    public $ssh2Object = null;
+
+    /**
+     * @var \phpseclib\Net\SFTP
+     */
+    public $sftpObject = null;
+
+    /**
+     * @var bool
+     */
+    public $masterNotfound = false;
 
     public function __destruct() {
         unset($this->sql, $this->aeskey, $this->hostID, $this->ssh2Object, $this->sftpObject);
@@ -112,7 +115,7 @@ class HttpdManagement {
                     return false;
                 }
 
-                $this->ssh2Pass = new Crypt_RSA();
+                $this->ssh2Pass = new \phpseclib\Crypt\RSA();
 
                 if ($row['publickey'] == 'B') {
                     $this->ssh2Pass->setPassword($row['pass']);
@@ -310,7 +313,7 @@ class HttpdManagement {
             return false;
         }
 
-        $this->sftpObject = new Net_SFTP($this->hostData['ip'], $this->hostData['port']);
+        $this->sftpObject = new \phpseclib\Net\SFTP($this->hostData['ip'], $this->hostData['port']);
 
         if ($this->sftpObject->login($this->hostData['user'], $this->ssh2Pass)) {
             return true;
@@ -326,7 +329,7 @@ class HttpdManagement {
             return false;
         }
 
-        $this->ssh2Object = new Net_SSH2($this->hostData['ip'], $this->hostData['port']);
+        $this->ssh2Object = new \phpseclib\Net\SSH2($this->hostData['ip'], $this->hostData['port']);
 
         if ($this->ssh2Object->login($this->hostData['user'], $this->ssh2Pass)) {
             return true;

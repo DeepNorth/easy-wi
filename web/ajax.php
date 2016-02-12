@@ -45,7 +45,7 @@ define('AJAXINCLUDED', true);
 if (is_dir(EASYWIDIR . '/install')) {
     die('Please remove the "install" folder');
 }
-
+require_once("vendor/autoload.php");
 include(EASYWIDIR . '/stuff/config.php');
 include(EASYWIDIR . '/stuff/keyphrasefile.php');
 include(EASYWIDIR . '/stuff/methods/functions.php');

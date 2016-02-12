@@ -38,18 +38,6 @@
  * Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-// Include PHPSeclib if not already included
-if (!class_exists('Net_SSH2')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SSH2.php');
-}
-
-if (!class_exists('Crypt_RSA')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Crypt/RSA.php');
-}
-
-if (!class_exists('Net_SFTP')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SFTP.php');
-}
 
 class masterServer {
 
@@ -664,7 +652,7 @@ class masterServer {
 
         if ($this->publickey != 'N' and file_exists($this->keyname)) {
 
-            $ssh2Pass = new Crypt_RSA();
+            $ssh2Pass = new \phpseclib\Crypt\RSA();
 
             if ($this->publickey == 'B') {
                 $ssh2Pass->setPassword($this->sshpass);
@@ -681,7 +669,7 @@ class masterServer {
 
     private function linuxSshConnectAndExecute ($updating, $getReturn, $ssh2Pass) {
 
-        $sftpObject = new Net_SFTP($this->sship, $this->sshport);
+        $sftpObject = new \phpseclib\Net\SFTP($this->sship, $this->sshport);
 
         $loginReturn = $sftpObject->login($this->sshuser, $ssh2Pass);
 
@@ -691,7 +679,7 @@ class masterServer {
             $sftpObject->chmod(0700, '/home/' . $this->sshuser . '/temp/master-' . $this->uniqueHex . '.sh');
 
             // File has been created, now login with SSH2 and execute the script
-            $sshObject = new Net_SSH2($this->sship, $this->sshport);
+            $sshObject = new \phpseclib\Net\SSH2($this->sship, $this->sshport);
 
             if ($sshObject->login($this->sshuser, $ssh2Pass)) {
 
@@ -726,7 +714,7 @@ class masterServer {
 
     private function windowsSshConnectAndExecute ($updating, $getReturn, $ssh2Pass) {
 
-        $sshObject = new Net_SSH2($this->sship, $this->sshport);
+        $sshObject = new \phpseclib\Net\SSH2($this->sship, $this->sshport);
 
         if ($sshObject->login($this->sshuser, $ssh2Pass)) {
 

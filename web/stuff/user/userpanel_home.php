@@ -41,8 +41,6 @@ if ((!isset($user_id) or !$main == "1") or (isset($user_id) and !isanyuser($user
 	die('No Access');
 }
 
-include(EASYWIDIR . '/third_party/Decoda/autoloader.php');
-use Decoda\Decoda;
 
 $sprache_bad = getlanguagefile('home', $user_language, $reseller_id);
 

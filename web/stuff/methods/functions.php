@@ -633,9 +633,6 @@ if (!function_exists('passwordgenerate')) {
         if (!isset($aeskey)) {
             include(EASYWIDIR . '/stuff/keyphrasefile.php');
         }
-        if (!class_exists('PHPMailer')) {
-            include(EASYWIDIR . '/third_party/phpmailer/PHPMailerAutoload.php');
-        }
 
         if ($template == 'emailnewticket') {
             $writerid = $shorten[1];

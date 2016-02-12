@@ -203,7 +203,7 @@ if (!function_exists('eacchange')) {
 
         $protocols = array();
 
-        $protocols_path = EASYWIDIR . '/third_party/gameq/GameQ/Protocols/';
+        $protocols_path = EASYWIDIR . '/vendor/austinb/gameq/src/GameQ/Protocols';
 
         // Grab the dir with all the classes available
         $dir = dir($protocols_path);
@@ -263,7 +263,7 @@ if (!function_exists('eacchange')) {
         $protocols = array();
 
         // Protocol list code taken from https://github.com/Austinb/GameQ/blob/v2/examples/list.php
-        $protocols_path = GAMEQ_BASE . 'gameq/protocols/';
+        $protocols_path = EASYWIDIR . '/vendor/austinb/gameqv2/gameq/protocols';
 
         // Grab the dir with all the classes available
         $dir = dir($protocols_path);

@@ -41,8 +41,7 @@ if ((!isset($admin_id) or $main != 1) or (isset($admin_id) and !isanyadmin($admi
 	die('No Access');
 }
 
-include(EASYWIDIR . '/third_party/Decoda/autoloader.php');
-use Decoda\Decoda;
+
 
 $sprache_bad = getlanguagefile('home', $user_language, $reseller_id);
 
@@ -262,7 +261,6 @@ if ($ui->smallletters('w', 2, 'get') == 'da' or (!$ui->smallletters('w', 2, 'get
                     $code->addFilter(new \Decoda\Filter\EmailFilter());
                     $code->addFilter(new \Decoda\Filter\UrlFilter());
                     $code->addFilter(new \Decoda\Filter\VideoFilter());
-                    $code->addFilter(new \Decoda\Filter\HeadLineFilter());
                     $code->addHook(new \Decoda\Hook\ClickableHook());
                     $text = $code->parse();
                 }

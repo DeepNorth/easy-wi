@@ -38,13 +38,6 @@
 
 if (!function_exists('ssh2_execute')) {
 
-    if (!class_exists('Net_SSH2')) {
-        include(EASYWIDIR . '/third_party/phpseclib/Net/SSH2.php');
-    }
-
-    if (!class_exists('Crypt_RSA')) {
-        include(EASYWIDIR . '/third_party/phpseclib/Crypt/RSA.php');
-    }
 
     function ssh2_execute($type, $id, $cmds) {
 
@@ -86,13 +79,13 @@ if (!function_exists('ssh2_execute')) {
                 # https://github.com/easy-wi/developer/issues/70
                 $privateKey = EASYWIDIR . '/keys/' . removePub($ssh2KeyName);
 
-                $sshObject = new Net_SSH2($ssh2IP, $ssh2Port);
+                $sshObject = new \phpseclib\Net\SSH2($ssh2IP, $ssh2Port);
 
-                if ($sshObject->error === false) {
+                if ($sshObject) {
 
                     if ($ssh2Publickey != 'N') {
 
-                        $ssh2Pass = new Crypt_RSA();
+                        $ssh2Pass = new \phpseclib\Crypt\RSA();
 
                         if ($ssh2Publickey == 'B') {
                             $ssh2Pass->setPassword($ssh2DecryptedPass);
@@ -149,7 +142,7 @@ if (!function_exists('ssh2_execute')) {
                 }
                 $query->execute(array($notified, $serverID));
 
-                return ($notified == 0 or $sshObject->error === false) ? $return : false;
+                return ($notified == 0 or $sshObject) ? $return : false;
 
             }
         }
@@ -161,14 +154,14 @@ if (!function_exists('ssh2_execute')) {
 
         $privateKey = EASYWIDIR . '/keys/' . removePub($sshKey);
 
-        $sshObject = new Net_SSH2($ssh2IP, $ssh2Port);
+        $sshObject = new \phpseclib\Net\SSH2($ssh2IP, $ssh2Port);
 
-        if ($sshObject->error === false) {
+        if ($sshObject) {
 
             if ($sshPublickey != 'N') {
 
 
-                $key = new Crypt_RSA();
+                $key = new \phpseclib\Crypt\RSA();
 
                 if ($sshPublickey == 'B') {
                     $key->setPassword($ssh2Pass);

@@ -45,7 +45,6 @@ if ((!isset($admin_id) or $main != 1) or (isset($admin_id) and !$pa['voicemaster
 include(EASYWIDIR . '/stuff/keyphrasefile.php');
 include(EASYWIDIR . '/stuff/methods/functions_ts3.php');
 include(EASYWIDIR . '/stuff/methods/functions_ssh_exec.php');
-include(EASYWIDIR . '/third_party/password_compat/password.php');
 
 $sprache = getlanguagefile('voice', $user_language, $reseller_id);
 $usprache = getlanguagefile('user', $user_language, $reseller_id);

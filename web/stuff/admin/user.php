@@ -42,7 +42,6 @@ if ((!isset($admin_id) or $main != 1) or (isset($admin_id) and !$pa['user'] and 
 }
 
 include(EASYWIDIR . '/stuff/keyphrasefile.php');
-include(EASYWIDIR . '/third_party/password_compat/password.php');
 
 $sprache = getlanguagefile('user', $user_language, $reseller_id);
 $rsprache = getlanguagefile('reseller', $user_language, $reseller_id);

@@ -35,6 +35,9 @@
     "ircmaxell/password-compat": "^1.0",
     "phpmailer/phpmailer": "^5.2",
     "phpseclib/phpseclib": "^2.0",
-    "monstaftp/Monsta-FTP": "^0.1.0"
+    "austinb/gameq": "3.0.0-alpha"
+  },
+  "autoload": {
+    "psr-0": { "GameQv2": "/vendor/austinb/gameqv2/gameq/." }
   }
 }

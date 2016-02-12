@@ -65,7 +65,7 @@ if (isset($argv)) {
 }
 
 define('EASYWIDIR', dirname(__FILE__));
-
+require_once("vendor/autoload.php");
 include(EASYWIDIR . '/stuff/methods/vorlage.php');
 include(EASYWIDIR . '/stuff/methods/functions.php');
 include(EASYWIDIR . '/stuff/methods/class_validator.php');
@@ -74,8 +74,6 @@ include(EASYWIDIR . '/stuff/methods/functions_gs.php');
 include(EASYWIDIR . '/stuff/methods/functions_ssh_exec.php');
 include(EASYWIDIR . '/stuff/methods/class_app.php');
 include(EASYWIDIR . '/stuff/methods/class_ts3.php');
-include(EASYWIDIR . '/third_party/gameq/GameQ/Autoloader.php');
-include(EASYWIDIR . '/third_party/gameq_v2/GameQ.php');
 include(EASYWIDIR . '/stuff/methods/class_mysql.php');
 include(EASYWIDIR . '/stuff/methods/class_httpd.php');
 include(EASYWIDIR . '/stuff/keyphrasefile.php');
@@ -323,7 +321,7 @@ if (!isset($ip) or $ui->escaped('SERVER_ADDR', 'server') == $ip or in_array($ip,
         foreach ($allServersV2Array as $servers) {
             if (count($servers) > 0) {
 
-                $gq = new GameQ();
+                $gq = new \GameQ\GameQ();
                 $gq->setOption('timeout', 60);
 
                 if (isset($dbConnect['debug']) and $dbConnect['debug'] == 1) {

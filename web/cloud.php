@@ -48,7 +48,7 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
 }
 
 set_time_limit($timelimit);
-
+require_once("vendor/autoload.php");
 include(EASYWIDIR . '/stuff/methods/vorlage.php');
 include(EASYWIDIR . '/stuff/methods/functions.php');
 include(EASYWIDIR . '/stuff/methods/class_validator.php');

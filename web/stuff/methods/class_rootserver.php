@@ -37,17 +37,6 @@
  * Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-if (!class_exists('Net_SSH2')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SSH2.php');
-}
-
-if (!class_exists('Crypt_RSA')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Crypt/RSA.php');
-}
-
-if (!class_exists('Net_SFTP')) {
-    include(EASYWIDIR . '/third_party/phpseclib/Net/SFTP.php');
-}
 
 class rootServer {
 
@@ -331,13 +320,13 @@ class rootServer {
                 # https://github.com/easy-wi/developer/issues/70
                 $privateKey = EASYWIDIR . '/keys/' . removePub($v['keyname']);
 
-                $sftpObject = new Net_SFTP($v['ip'], $v['port']);
+                $sftpObject = new \phpseclib\Net\SFTP($v['ip'], $v['port']);
 
                 if (file_exists($privateKey) and $sftpObject->error === false) {
 
                     if ($v['publickey'] != 'N') {
 
-                        $ssh2Pass = new Crypt_RSA();
+                        $ssh2Pass = new \phpseclib\Crypt\RSA();
 
                         if ($v['publickey'] == 'B') {
                             $ssh2Pass->setPassword($v['pass']);
@@ -454,13 +443,13 @@ class rootServer {
 
                                 $sftpObject->put($file, $this->assembleDhcpConfig($config, $k));
 
-                                $sshObject = new Net_SSH2($v['ip'], $v['port']);
+                                $sshObject = new \phpseclib\Net\SSH2($v['ip'], $v['port']);
 
-                                if ($sshObject->error === false) {
+                                if ($sshObject) {
 
                                     if ($v['publickey'] != 'N') {
 
-                                        $ssh2Pass = new Crypt_RSA();
+                                        $ssh2Pass = new \phpseclib\Crypt\RSA();
 
                                         if ($v['publickey'] == 'B') {
                                             $ssh2Pass->setPassword($v['pass']);
@@ -517,13 +506,13 @@ class rootServer {
 
             $privateKey = EASYWIDIR . '/keys/' . removePub($v['keyname']);
 
-            $sftpObject = new Net_SFTP($v['ip'], $v['port']);
+            $sftpObject = new \phpseclib\Net\SFTP($v['ip'], $v['port']);
 
             if ($sftpObject->error === false) {
 
                 if ($v['publickey'] == 'Y' and file_exists($privateKey)) {
 
-                    $ssh2Pass = new Crypt_RSA();
+                    $ssh2Pass = new \phpseclib\Crypt\RSA();
 
                     if ($v['publickey'] == 'B') {
                         $ssh2Pass->setPassword($v['pass']);
@@ -840,13 +829,13 @@ class rootServer {
 
             $privateKey = EASYWIDIR . '/keys/' .  removePub($this->vmwareHosts[$hID['hostID']]['vmIDs']['keyname']);
 
-            $sftpObject = new Net_SFTP($this->vmwareHosts[$hID]['vmIDs']['ip'], $this->vmwareHosts[$hID]['vmIDs']['dport']);
+            $sftpObject = new \phpseclib\Net\SFTP($this->vmwareHosts[$hID]['vmIDs']['ip'], $this->vmwareHosts[$hID]['vmIDs']['dport']);
 
             if (file_exists($privateKey) and $sftpObject->error === false) {
 
                 if ($this->vmwareHosts[$hID]['vmIDs']['publickey'] != 'N') {
 
-                    $ssh2Pass = new Crypt_RSA();
+                    $ssh2Pass = new \phpseclib\Crypt\RSA();
 
                     if ($this->vmwareHosts[$hID]['vmIDs']['publickey'] == 'B') {
                         $ssh2Pass->setPassword($this->vmwareHosts[$hID]['vmIDs']['dpass']);
@@ -860,9 +849,9 @@ class rootServer {
 
                 if ($sftpObject->login($this->vmwareHosts[$hID]['vmIDs']['duser'], $ssh2Pass)) {
 
-                    $sshObject = new Net_SSH2($this->vmwareHosts[$hID]['vmIDs']['ip'], $this->vmwareHosts[$hID]['vmIDs']['dport']);
+                    $sshObject = new \phpseclib\Net\SSH2($this->vmwareHosts[$hID]['vmIDs']['ip'], $this->vmwareHosts[$hID]['vmIDs']['dport']);
 
-                    if (file_exists($privateKey) and $sshObject->error === false) {
+                    if (file_exists($privateKey) and $sshObject) {
 
                         if ($sshObject->login($this->vmwareHosts[$hID]['vmIDs']['duser'], $ssh2Pass)) {
 

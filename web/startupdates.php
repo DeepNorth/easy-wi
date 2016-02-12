@@ -66,7 +66,7 @@ if (isset($argv)) {
 set_time_limit($timelimit);
 
 define('EASYWIDIR', dirname(__FILE__));
-
+require_once("vendor/autoload.php");
 include(EASYWIDIR . '/stuff/methods/vorlage.php');
 include(EASYWIDIR . '/stuff/methods/class_validator.php');
 include(EASYWIDIR . '/stuff/methods/functions.php');

@@ -36,7 +36,7 @@
  * Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-
+require_once("vendor/autoload.php");
 if (isset($page_include)) {
     $reseller_id = 0;
 

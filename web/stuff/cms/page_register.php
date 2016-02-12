@@ -38,7 +38,6 @@
  * Programm erhalten haben. Wenn nicht, siehe <http://www.gnu.org/licenses/>.
  */
 
-include(EASYWIDIR . '/third_party/password_compat/password.php');
 
 if (!isset($page_include) or (isset($user_id)) or isset($admin_id)) {
     if (isset($page_data->canurl)) {
